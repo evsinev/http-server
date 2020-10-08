@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
+
+    <groupId>com.payneteasy.http-server</groupId>
+    <artifactId>http-server-integration-test</artifactId>
+
+    <name>os processo integration test ${project.version}</name>
+
+    <parent>
+        <groupId>com.payneteasy</groupId>
+        <artifactId>http-server</artifactId>
+        <version>1.0-1-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.payneteasy.http-server</groupId>
+            <artifactId>http-server-impl</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
+</project>
