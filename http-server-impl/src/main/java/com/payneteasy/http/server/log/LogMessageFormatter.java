@@ -18,7 +18,7 @@ public class LogMessageFormatter {
         }
 
         sb.append(" [ ");
-        for(int i=0; i<aKeysValues.length; i=+2) {
+        for(int i=0; i<aKeysValues.length; i+=2) {
             if(i > 0) {
                 sb.append(", ");
 
