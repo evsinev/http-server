@@ -20,4 +20,8 @@ public class HttpRequestMessageBody {
     public String asString(Charset aCharset) {
         return new String(body, aCharset);
     }
+
+    public byte[] asBytes() {
+        return body;
+    }
 }

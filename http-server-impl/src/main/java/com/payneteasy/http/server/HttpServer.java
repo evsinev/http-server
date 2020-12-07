@@ -1,18 +1,14 @@
 package com.payneteasy.http.server;
 
-import com.payneteasy.http.server.impl.HttpClientTask;
-import com.payneteasy.http.server.log.HttpLoggerSystemOut;
-import com.payneteasy.http.server.log.IHttpLogger;
-import com.payneteasy.http.server.impl.response.HttpResponseBuilder;
 import com.payneteasy.http.server.api.handler.IHttpRequestHandler;
-import com.payneteasy.http.server.api.response.HttpResponseStatusLine;
+import com.payneteasy.http.server.impl.HttpClientTask;
+import com.payneteasy.http.server.log.IHttpLogger;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class HttpServer {
@@ -44,8 +40,9 @@ public class HttpServer {
     }
 
     public void acceptSocketAndWait() {
-        if (!thread.equals(Thread.currentThread())) {
-            throw new IllegalStateException("invoke acceptSocketAndWait() in the same thread as constructor");
+        if (thread.equals(Thread.currentThread())) {
+            throw new IllegalStateException("Method HttpServer.acceptSocketAndWait() invoked in the same thread as its constructor" +
+                    ". Constructor thread is " + thread + ", run() thread is " + Thread.currentThread() );
         }
 
         log.debug("Start listening...", "serverSocket", serverSocket);

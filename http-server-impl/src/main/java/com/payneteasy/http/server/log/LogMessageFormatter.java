@@ -8,8 +8,6 @@ public class LogMessageFormatter {
 
     public String format(String aMessage, Object... aKeysValues) {
         StringBuilder sb = new StringBuilder();
-        sb.append(new Date());
-        sb.append(" ");
         sb.append(aMessage);
 
         if(aKeysValues == null || aKeysValues.length == 0) {
