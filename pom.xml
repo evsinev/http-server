@@ -49,15 +49,15 @@
     <distributionManagement>
 
         <repository>
-            <id>sonatype-nexus-staging</id>
-            <name>sonatype oss RELEASE repository</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+            <id>mpos-repo</id>
+            <name>mpos release repository</name>
+            <url>https://mpos.pne.io/maven-deploy/releases</url>
         </repository>
 
         <snapshotRepository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>sonatype oss SNAPSHOT repository</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <id>mpos-repo-snapshots</id>
+            <name>mpos snapshot repository</name>
+            <url>https://mpos.pne.io/maven-deploy/snapshots</url>
             <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
 
@@ -267,6 +267,11 @@
                 </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.0.0-M1</version>
+            </plugin>
         </plugins>
     </build>
 
