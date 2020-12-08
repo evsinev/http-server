@@ -4,7 +4,7 @@
 
     <artifactId>http-server</artifactId>
     <groupId>com.payneteasy</groupId>
-    <version>1.0-3-SNAPSHOT</version>
+    <version>1.0-3</version>
 
     <name>Java os process ${project.version}</name>
 
@@ -40,7 +40,7 @@
         <connection>scm:git:git@github.com:evsinev/http-server.git</connection>
         <developerConnection>scm:git:git@github.com:evsinev/http-server.git</developerConnection>
         <url>https://github.com/evsinev/http-server.git</url>
-        <tag>HEAD</tag>
+        <tag>http-server-1.0-3</tag>
   </scm>
 
     <!--
