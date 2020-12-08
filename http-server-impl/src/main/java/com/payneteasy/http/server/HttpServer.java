@@ -18,7 +18,6 @@ public class HttpServer {
     private final IHttpLogger         log;
     private final ExecutorService     executorService;
     private final IHttpRequestHandler handler;
-    private final Thread              thread;
     private final int                 readTimeoutMs;
 
     public HttpServer(
@@ -31,7 +30,6 @@ public class HttpServer {
         log             = aLog;
         executorService = aExecutor;
         handler         = aHandler;
-        thread          = Thread.currentThread();
         readTimeoutMs   = aReadTimeoutMs;
 
         serverSocket = new ServerSocket();
@@ -40,11 +38,6 @@ public class HttpServer {
     }
 
     public void acceptSocketAndWait() {
-        if (thread.equals(Thread.currentThread())) {
-            throw new IllegalStateException("Method HttpServer.acceptSocketAndWait() invoked in the same thread as its constructor" +
-                    ". Constructor thread is " + thread + ", run() thread is " + Thread.currentThread() );
-        }
-
         log.debug("Start listening...", "serverSocket", serverSocket);
         while (!Thread.currentThread().isInterrupted() && isRunning.get()) {
             try {
@@ -70,7 +63,6 @@ public class HttpServer {
     public void stop() {
         log.debug("Stopping ...");
         isRunning.set(false);
-        thread.interrupt();
         try {
             serverSocket.close();
         } catch (Exception e) {
