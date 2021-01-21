@@ -6,6 +6,8 @@ import java.io.InputStream;
 
 public class HttpInputStreamImpl implements IHttpInputStream {
 
+    private static final byte[] EMPTY_BYTES = new byte[0];
+
     private final InputStream in;
 
     public HttpInputStreamImpl(InputStream in) {
@@ -88,6 +90,10 @@ public class HttpInputStreamImpl implements IHttpInputStream {
 
     @Override
     public byte[] readBytes(int aLength) throws IOException {
+        if(aLength == 0) {
+            return EMPTY_BYTES;
+        }
+
         byte[] buffer = new byte[aLength];
 
         int offset = 0;

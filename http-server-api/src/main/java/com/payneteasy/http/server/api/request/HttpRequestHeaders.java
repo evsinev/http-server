@@ -17,11 +17,16 @@ public class HttpRequestHeaders {
     }
 
     public int getContentLength() {
-        return getRequiredInt("content-length");
+        return getInt("content-length", 0);
     }
 
     public String getString(String aName) {
         return headers.get(normalizeName(aName));
+    }
+
+    public int getInt(String aName, int aDefaultValue) {
+        String value = headers.get(normalizeName(aName));
+        return value == null || value.isEmpty() ? aDefaultValue : Integer.parseInt(value);
     }
 
     public String getRequiredString(String aName) {
