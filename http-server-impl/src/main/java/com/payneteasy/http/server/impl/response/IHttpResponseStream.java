@@ -10,7 +10,7 @@ public interface IHttpResponseStream {
 
     void writeStatusLine(HttpResponseStatusLine aStatusLine) throws IOException;
 
-    void writeHeaders(HttpResponseHeaders aHeaders) throws IOException;
+    void writeHeaders(HttpResponseHeaders aHeaders, HttpResponseMessageBody body) throws IOException;
 
     void writeBody(HttpResponseMessageBody aBody) throws IOException;
 }

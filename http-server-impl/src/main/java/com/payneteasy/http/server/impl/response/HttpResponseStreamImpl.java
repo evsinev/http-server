@@ -35,15 +35,22 @@ public class HttpResponseStreamImpl implements IHttpResponseStream {
     }
 
     @Override
-    public void writeHeaders(HttpResponseHeaders aHeaders) throws IOException {
+    public void writeHeaders(HttpResponseHeaders aHeaders, HttpResponseMessageBody body) throws IOException {
         for (HttpResponseHeader header : aHeaders.getHeaders()) {
-            out.write(header.getName().getBytes(US_ASCII));
-            out.write(COLON);
-            out.write(header.getValue().getBytes(US_ASCII));
-            out.write(CRLF);
+            writeHeader(header);
+        }
+        if(body.getBytes() != null && body.getBytes().length > 0) {
+            writeHeader(new HttpResponseHeader("Content-Length", String.valueOf(body.getBytes().length)));
         }
         out.write(CRLF);
         out.flush();
+    }
+
+    private void writeHeader(HttpResponseHeader header) throws IOException {
+        out.write(header.getName().getBytes(US_ASCII));
+        out.write(COLON);
+        out.write(header.getValue().getBytes(US_ASCII));
+        out.write(CRLF);
     }
 
     @Override

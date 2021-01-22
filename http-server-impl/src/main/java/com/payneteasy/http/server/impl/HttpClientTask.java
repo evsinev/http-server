@@ -60,9 +60,9 @@ public class HttpClientTask implements Runnable {
         HttpResponse        response       = requestHandler.handleRequest(request);
         IHttpResponseStream responseStream = new HttpResponseStreamImpl(aOut);
 
-        responseStream.writeStatusLine  ( response.getStatusLine() );
-        responseStream.writeHeaders     ( response.getHeaders()    );
-        responseStream.writeBody        ( response.getBody()       );
+        responseStream.writeStatusLine  ( response.getStatusLine()                  );
+        responseStream.writeHeaders     ( response.getHeaders(), response.getBody() );
+        responseStream.writeBody        ( response.getBody()                        );
 
         logger.debug("Wrote response", "status", response.getStatusLine(), "headers", response.getHeaders(), "body", response.getBody());
     }
