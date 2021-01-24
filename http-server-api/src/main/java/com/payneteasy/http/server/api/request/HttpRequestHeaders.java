@@ -6,9 +6,11 @@ import java.util.Map;
 
 public class HttpRequestHeaders {
 
-    private final Map<String, String> headers;
+    private final List<HttpRequestHeader> originalHeaders;
+    private final Map<String, String>     headers;
 
     public HttpRequestHeaders(List<HttpRequestHeader> aHeaders) {
+        originalHeaders = aHeaders;
         headers = new HashMap<>(aHeaders.size());
 
         for (HttpRequestHeader header : aHeaders) {
@@ -43,6 +45,10 @@ public class HttpRequestHeaders {
 
     private String normalizeName(String aName) {
         return aName.toLowerCase();
+    }
+
+    public List<HttpRequestHeader> getOriginalHeaders() {
+        return originalHeaders;
     }
 
     @Override
