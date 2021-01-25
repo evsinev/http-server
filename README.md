@@ -17,7 +17,7 @@ Features:
     <repository>
         <id>pne</id>
         <name>payneteasy repo</name>
-        <url>https://mpos.pne.io/maven2</url>
+        <url>https://maven.pne.io</url>
     </repository>
 </repositories>
   
