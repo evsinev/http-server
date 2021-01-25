@@ -42,6 +42,8 @@ public class HttpResponseStreamImpl implements IHttpResponseStream {
         if(body.getBytes() != null && body.getBytes().length > 0) {
             writeHeader(new HttpResponseHeader("Content-Length", String.valueOf(body.getBytes().length)));
         }
+        writeHeader(new HttpResponseHeader("Connection", "Close"));
+
         out.write(CRLF);
         out.flush();
     }

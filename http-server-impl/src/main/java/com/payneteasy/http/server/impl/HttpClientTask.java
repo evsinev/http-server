@@ -39,12 +39,7 @@ public class HttpClientTask implements Runnable {
     public void run() {
         try {
 
-            for(int i=0; i<100; i++) {
-                boolean keepAlive = processStreams(socket.getInputStream(), socket.getOutputStream(), (InetSocketAddress) socket.getRemoteSocketAddress());
-                if(!keepAlive) {
-                    break;
-                }
-            }
+            processStreams(socket.getInputStream(), socket.getOutputStream(), (InetSocketAddress) socket.getRemoteSocketAddress());
 
         } catch (Exception e) {
             logger.error("Error while processing client", e);
@@ -53,7 +48,7 @@ public class HttpClientTask implements Runnable {
         }
     }
 
-    private boolean processStreams(InputStream aIn, OutputStream aOut, InetSocketAddress aAddress) throws IOException {
+    private void processStreams(InputStream aIn, OutputStream aOut, InetSocketAddress aAddress) throws IOException {
         IHttpInputStream       httpInputStream = new HttpInputStreamImpl(aIn);
         HttpRequestLine        requestLine     = requestLineParser.parseRequestLine(httpInputStream);
         HttpRequestHeaders     requestHeaders  = requestHeadersParser.parseHeaders(httpInputStream);
@@ -70,15 +65,10 @@ public class HttpClientTask implements Runnable {
         responseStream.writeBody        ( response.getBody()                        );
 
         logger.debug("Wrote response", "status", response.getStatusLine(), "headers", response.getHeaders(), "body", response.getBody());
-
-        return isKeepAlive(requestHeaders);
-    }
-
-    private boolean isKeepAlive(HttpRequestHeaders aHeaders) {
-        return "Keep-Alive".equals(aHeaders.getString("Connection"));
     }
 
     private void closeSocket() {
+        logger.debug("Closing connection");
         try {
             socket.close();
         } catch (IOException e) {
